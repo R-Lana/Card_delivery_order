@@ -10,9 +10,11 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class CardDelveryOrderTest {
+public class CardDeliveryOrderTest {
     @BeforeEach
     public void setup () {
+        Configuration.headless = true;
+        Configuration.holdBrowserOpen = true;
         open("http://localhost:9999");
     }
     public String generateDate(String pattern) {
@@ -20,8 +22,6 @@ public class CardDelveryOrderTest {
     }
     @Test
     void shouldSendForm() {
-        Configuration.headless = true;
-        Configuration.holdBrowserOpen = true;
         $ (LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         $("[data-test-id='city'] input").setValue("Уфа");
         $("[data-test-id='date'] input").doubleClick();
